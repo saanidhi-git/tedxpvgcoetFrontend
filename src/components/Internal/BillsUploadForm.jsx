@@ -29,13 +29,13 @@ const styles = {
     position: "relative",
     zIndex: 1,
     boxSizing: "border-box",
-    padding: "clamp(90px, 12vw, 140px) clamp(10px, 3vw, 20px) 40px",
+    padding: "140px 20px 80px",
   },
   card: {
     backgroundColor: "rgba(15, 15, 20, 0.75)",
     border: "1px solid rgba(255, 255, 255, 0.1)",
     borderRadius: "16px",
-    padding: "clamp(20px, 4vw, 40px) clamp(16px, 3.5vw, 36px)",
+    padding: "40px 36px",
     maxWidth: "650px",
     width: "100%",
     backdropFilter: "blur(20px)",
@@ -51,8 +51,6 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "flex-start",
     marginBottom: "32px",
-    flexWrap: "wrap",
-    gap: "20px",
   },
   title: {
     fontFamily: '"Inter", sans-serif',
@@ -384,6 +382,17 @@ export default function BillsUploadForm({
     let successCount = 0;
     let failMsgs = [];
 
+    const d = new Date();
+    const timeString = d.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    const dateString = d.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+    });
+    const batchTimestamp = `${timeString}, ${dateString}`;
+
     let API_URL = "https://www.backend.tedxpvgcoet.in";
     try {
       if (import.meta.env.VITE_BACKEND_URL)
@@ -409,6 +418,10 @@ export default function BillsUploadForm({
           imageFile: bill.image.base64,
           fileName: bill.image.fileName,
           mimeType: bill.image.mimeType,
+          batchTitle:
+            bills.length > 1
+              ? `Multiple Bills Uploaded by ${name} (${team}) at ${batchTimestamp}`
+              : null,
         };
 
         const res = await fetch(`${API_URL}/bills`, {
@@ -524,6 +537,11 @@ export default function BillsUploadForm({
             .bills-card {
                 padding: 24px 16px !important;
             }
+            .bills-header {
+                flex-direction: column !important;
+                gap: 16px !important;
+                align-items: flex-start !important;
+            }
         }
       `}</style>
 
@@ -538,7 +556,7 @@ export default function BillsUploadForm({
 
       <div style={styles.pageContainer}>
         <div style={styles.card} className="bills-card">
-          <div style={styles.headerRow}>
+          <div style={styles.headerRow} className="bills-header">
             <div>
               <h1 style={styles.title}>Internal Bills</h1>
               <p style={styles.subtitle}>
