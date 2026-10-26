@@ -6,7 +6,11 @@
   color: #f8f6f2;
   background-color: #0c0d0f;
   background-image:
-    radial-gradient(ellipse at 50% 100%, rgb(225 6 0 / 12%) 0%, transparent 65%),
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgb(225 6 0 / 12%) 0%,
+      transparent 65%
+    ),
     radial-gradient(circle at 12% 8%, rgb(131 20 24 / 22%), transparent 32rem),
     radial-gradient(circle at 88% 45%, rgb(225 6 0 / 8%), transparent 28rem);
 }
@@ -62,13 +66,19 @@
   cursor: pointer;
   break-inside: avoid;
   vertical-align: top;
-  transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+  touch-action: pan-y;
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease,
+    border-color 300ms ease;
 }
 
 .theseus-illusions__card:hover {
   transform: translateY(-4px);
   border-color: rgba(225, 6, 0, 0.35);
-  box-shadow: 0 20px 45px rgb(0 0 0 / 65%), 0 0 25px rgba(225, 6, 0, 0.15);
+  box-shadow:
+    0 20px 45px rgb(0 0 0 / 65%),
+    0 0 25px rgba(225, 6, 0, 0.15);
 }
 
 .theseus-illusions__card--1 {
@@ -120,6 +130,7 @@
   border-radius: inherit;
   background: linear-gradient(180deg, rgb(0 0 0 / 68%), rgb(0 0 0 / 78%));
   opacity: 0;
+  pointer-events: none;
   transition: opacity 350ms ease;
 }
 
@@ -127,7 +138,8 @@
   width: 100%;
   max-height: 100%;
   overflow-y: auto;
-  overscroll-behavior: contain;
+  overscroll-behavior-y: auto;
+  touch-action: pan-y;
   padding: 0 0.25rem 0.25rem 0;
   scrollbar-color: rgb(255 255 255 / 50%) transparent;
   scrollbar-width: thin;
@@ -163,6 +175,7 @@
 .theseus-illusions__card.is-open .theseus-illusions__overlay,
 .theseus-illusions__card:focus-visible .theseus-illusions__overlay {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .theseus-illusions__card:focus-visible {
@@ -173,6 +186,7 @@
 @media (hover: hover) and (pointer: fine) {
   .theseus-illusions__card:hover .theseus-illusions__overlay {
     opacity: 1;
+    pointer-events: auto;
   }
 
   .theseus-illusions__card:hover .theseus-illusions__image {
