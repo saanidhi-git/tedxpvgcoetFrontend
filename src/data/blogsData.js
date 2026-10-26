@@ -7,6 +7,7 @@ import voidImg from "../assets/blogs/void-of-everything.webp";
 import zeroImg from "../assets/blogs/chronicles-of-the-zero.webp";
 import cancerImg from "../assets/blogs/cancer-survivorship.webp";
 import ashesImg from "../assets/backgrounds/Punarutthan-bg.webp";
+import nameImg from "../assets/blogs/whats-in-a-name.webp";
 
 export const BLOG_CATEGORIES = [
   "All",
@@ -17,6 +18,17 @@ export const BLOG_CATEGORIES = [
 
 export const BLOGS_DATA = [
   // Ship of Theseus - Continuum
+
+  {
+    id: "whats-in-a-name",
+    title: "What's in a Name?",
+    category: "Ship of Theseus - Continuum",
+    readTime: "2 min read",
+    description:
+      "Exploring identity, labels, and the philosophical weight carried by the names we give and inherit.",
+    url: "https://tedxpvgcoet.substack.com/p/whats-in-a-name",
+    thumbnail: nameImg,
+  },
 
   {
     id: "birth-of-a-paradox",
